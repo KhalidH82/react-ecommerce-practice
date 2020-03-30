@@ -6,22 +6,28 @@ import Header from "./Components/header/header";
 import SignIn from "./Pages/SignIn-SignUp/SignIn-SignUp";
 import "./App.css";
 
-import { auth } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
-  let unsubscribefromAuth = null;
 
   useEffect(() => {
-    unsubscribefromAuth = auth.onAuthStateChanged(user => {
-      setCurrentUser(user);
-      console.log(user);
+    let unsubscribefromAuth = null;
+    unsubscribefromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot(snapShot => {
+          setCurrentUser({ id: snapShot.id, ...snapShot.data() });
+        });
+      }
+      setCurrentUser({ userAuth });
     });
     return () => {
       unsubscribefromAuth();
     };
   }, []);
-
+  console.log(currentUser);
   return (
     <div>
       <Header currentUser={currentUser} />
