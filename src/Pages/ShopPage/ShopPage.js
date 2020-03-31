@@ -1,3 +1,5 @@
+// CLASS BASED COMPONENT!!!
+
 import React, { Component } from "react";
 import SHOP_DATA from "./SHOP_DATA";
 import CollectionPreview from "../../Components/collection-preview/collection-preview";

@@ -33,13 +33,6 @@ const SignUp = () => {
     }
   };
 
-  //   const handleChange = e => {
-  //     setDisplayName(e.target.value);
-  //     setemail(e.target.value);
-  //     setpassword(e.target.value);
-  //     setconfirmPassword(e.target.value);
-  //   };
-
   return (
     <div className="sign-up">
       <h2 className="title">I do not have an account</h2>

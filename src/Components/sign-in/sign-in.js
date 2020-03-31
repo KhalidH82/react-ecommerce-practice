@@ -1,10 +1,12 @@
+// CLASS BASED COMPONENT!!!
+
 import React, { Component } from "react";
 import "./sign-in.styles.scss";
 
 import FormInput from "../../Components/form-input/form-input";
 import CustomButton from "../../Components/custom-button/custom-button";
 
-import { signInWithGoogle } from "../../firebase/firebase.utils";
+import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
 
 export class SignIn extends Component {
   constructor(props) {
@@ -15,9 +17,16 @@ export class SignIn extends Component {
     };
   }
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
     this.setState({ email: "", password: "" });
+    const { email, password } = this.state;
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      this.setState({ email: "", password: "" });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   handleChange = e => {
