@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Homepage from "./Pages/Homepage/Homepage";
 import ShopPage from "./Pages/ShopPage/ShopPage";
 import Header from "./Components/header/header";
@@ -27,7 +27,7 @@ function App(props) {
     return () => {
       unsubscribefromAuth();
     };
-  }, [props]);
+  }, []);
 
   return (
     <div>
@@ -35,14 +35,22 @@ function App(props) {
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route path="/shop" component={ShopPage} />
-        <Route path="/signin" component={SignIn} />
+        <Route
+          exact
+          path="/signin"
+          render={() => (props.currentUser ? <Redirect to="/" /> : <SignIn />)}
+        />
       </Switch>
     </div>
   );
 }
 
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+});
+
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
