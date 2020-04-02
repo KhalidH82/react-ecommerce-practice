@@ -1,5 +1,5 @@
 import React from "react";
-import { connect, mapDispactchToProps } from "react-redux";
+import { connect } from "react-redux";
 import { addItem } from "../../redux/cart/cart.actions";
 
 import "./collection-item.styles.scss";
