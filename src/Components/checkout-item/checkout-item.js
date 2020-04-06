@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import "./checkout-item.styles.scss";
 import {
@@ -33,8 +33,6 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
     </div>
   );
 };
-
-const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => ({
   clearItem: item => dispatch(clearItemFromCart(item)),

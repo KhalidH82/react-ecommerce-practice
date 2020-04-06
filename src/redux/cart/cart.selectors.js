@@ -1,5 +1,4 @@
 import { createSelector } from "reselect";
-import { createSelectorHook } from "react-redux";
 
 const selectCart = state => state.cart;
 
