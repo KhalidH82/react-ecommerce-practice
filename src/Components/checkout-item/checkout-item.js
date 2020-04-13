@@ -4,7 +4,7 @@ import "./checkout-item.styles.scss";
 import {
   clearItemFromCart,
   addItem,
-  removeItem
+  removeItem,
 } from "../../redux/cart/cart.actions";
 
 const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
@@ -28,16 +28,16 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
       </span>
       <span className="price">{price}</span>
       <div className="remove-button" onClick={() => clearItem(cartItem)}>
-        &#10094;
+        &#x78;
       </div>
     </div>
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  clearItem: item => dispatch(clearItemFromCart(item)),
-  addItem: item => dispatch(addItem(item)),
-  removeItem: item => dispatch(removeItem(item))
+const mapDispatchToProps = (dispatch) => ({
+  clearItem: (item) => dispatch(clearItemFromCart(item)),
+  addItem: (item) => dispatch(addItem(item)),
+  removeItem: (item) => dispatch(removeItem(item)),
 });
 
 export default connect(null, mapDispatchToProps)(CheckoutItem);
