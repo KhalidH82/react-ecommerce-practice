@@ -9,7 +9,7 @@ const config = {
   projectId: "react-ecommerce-practice",
   storageBucket: "react-ecommerce-practice.appspot.com",
   messagingSenderId: "451719946261",
-  appId: "1:451719946261:web:963be1d225557591c02e1c"
+  appId: "1:451719946261:web:963be1d225557591c02e1c",
 };
 
 export const createUserProfileDocument = async (userAuth, addtionalData) => {
@@ -25,7 +25,7 @@ export const createUserProfileDocument = async (userAuth, addtionalData) => {
         displayName,
         email,
         createdAt,
-        ...addtionalData
+        ...addtionalData,
       });
     } catch (error) {
       console.log(error.message, "error creating user");
@@ -36,6 +36,21 @@ export const createUserProfileDocument = async (userAuth, addtionalData) => {
 };
 
 firebase.initializeApp(config);
+
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const collectionRef = firestore.collection(collectionKey);
+
+  const batch = firestore.batch();
+  objectsToAdd.forEach((obj) => {
+    const newDocRef = collectionRef.doc();
+    batch.set(newDocRef, obj);
+  });
+
+  return await batch.commit();
+};
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
