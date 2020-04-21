@@ -18,7 +18,6 @@ import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 
 function App(props) {
-  const { setCurrentUser } = props;
   useEffect(() => {
     let unsubscribefromAuth = null;
     unsubscribefromAuth = auth.onAuthStateChanged(async (userAuth) => {
@@ -34,7 +33,7 @@ function App(props) {
     return () => {
       unsubscribefromAuth();
     };
-  }, [setCurrentUser]);
+  }, []);
 
   return (
     <div>
